@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unresolved; Character</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -20,22 +19,21 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 .character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
 .character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR BIODATA STYLE ===== */
 .navbar{
   position:fixed;
   top:0;
   left:50%;
   transform:translateX(-50%);
   width:90%;
-  padding:14px 20px;
   background:#14141c;
   border-radius:14px;
+  padding:14px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   box-shadow:0 20px 40px rgba(0,0,0,.6);
   z-index:1000;
-  transition: top 0.3s ease;
 }
 
 .logo-container{
@@ -50,8 +48,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   color:#b56cff;
 }
 
-/* Play button */
-.play-btn{
+#playBtn{
   width:28px;
   height:28px;
   border:none;
@@ -66,7 +63,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   font-size:14px;
   transition: transform 0.2s;
 }
-.play-btn:hover{transform: scale(1.1);}
+#playBtn:hover{transform: scale(1.1);}
 
 /* Hamburger */
 .hamburger{
@@ -86,65 +83,53 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   border-radius:2px;
   transition: all 0.4s ease;
 }
-.hamburger.active div:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active div:nth-child(1){
+  transform: rotate(45deg) translate(5px,5px);
+}
 .hamburger.active div:nth-child(2){opacity:0;}
-.hamburger.active div:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.hamburger.active div:nth-child(3){
+  transform: rotate(-45deg) translate(5px,-5px);
+}
 
-/* MOBILE OVERLAY */
+/* Overlay */
 .overlay{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   display:none;
-  z-index:999;
+  z-index:998;
+  background:rgba(0,0,0,0.3);
 }
 .overlay.show{display:block;}
 
-/* MOBILE MENU */
-.mobile-menu{
+/* Mobile menu */
+.nav-links{
   position:fixed;
   top:0;
   right:-50%;
   width:50%;
-  height:100%;
+  height:100vh;
   background:#14141c;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:flex-end;
-  padding-right:30px;
-  gap:28px;
+  padding-right:20px;
+  gap:30px;
   transition:right 0.4s ease;
+  z-index:999;
 }
-.mobile-menu a{
-  color:#fff;
+.nav-links a{
   text-decoration:none;
+  color:#fff;
   font-size:18px;
   font-weight:600;
-  transition: color 0.3s;
 }
-.mobile-menu a:hover{color:#b56cff;}
-.overlay.show .mobile-menu{right:0;}
+.nav-links a:hover{color:#b56cff;}
+.overlay.show .nav-links{right:0;}
 
-/* DESKTOP LINKS */
-.nav-links-desktop{
-  display:flex;
-  gap:20px;
-}
-.nav-links-desktop a{
-  color:#ccc;
-  text-decoration:none;
-  font-weight:600;
-  font-size:14px;
-}
-.nav-links-desktop a:hover{color:#b56cff;}
-
-/* MEDIA QUERIES */
+/* Mobile responsive */
 @media(max-width:900px){
   .hamburger{display:flex;}
-  .nav-links-desktop{display:none;}
 }
 </style>
 </head>
@@ -158,14 +143,8 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 <!-- NAVBAR -->
 <div class="navbar" id="navbar">
   <div class="logo-container">
-    <div class="logo">UNRESOLVED;</div>
-    <button class="play-btn" id="playBtn">▶</button>
-  </div>
-  <div class="nav-links-desktop">
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
-    <a href="#universe">STORY</a>
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
-    <a href="#issue">WORLD</a>
+    <div class="logo">UNRESOLVED; |</div>
+    <button id="playBtn">▶</button>
   </div>
   <div class="hamburger" id="hamburger">
     <div></div>
@@ -174,9 +153,9 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   </div>
 </div>
 
-<!-- MOBILE OVERLAY + MENU -->
+<!-- MOBILE MENU & OVERLAY -->
 <div class="overlay" id="overlay">
-  <div class="mobile-menu" id="mobileMenu">
+  <div class="nav-links" id="navLinks">
     <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
     <a href="#universe">STORY</a>
     <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
@@ -195,57 +174,51 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 </div>
 
 <script>
-// Hamburger + mobile menu
-const hamburger = document.getElementById('hamburger');
-const overlay = document.getElementById('overlay');
-const mobileMenu = document.getElementById('mobileMenu');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  overlay.classList.toggle('show');
-  document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : 'auto';
+// Audio play button
+const audio = document.getElementById("song");
+const playBtn = document.getElementById("playBtn");
+playBtn.addEventListener("click", ()=>{
+  if(audio.paused){
+    audio.play();
+    playBtn.textContent = "❚❚";
+  }else{
+    audio.pause();
+    playBtn.textContent = "▶";
+  }
 });
 
-overlay.addEventListener('click', (e) => {
-  if(!mobileMenu.contains(e.target)){
-    overlay.classList.remove('show');
-    hamburger.classList.remove('active');
-    document.body.style.overflow = 'auto';
+// Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const overlay = document.getElementById("overlay");
+const navLinks = document.getElementById("navLinks");
+
+hamburger.addEventListener("click", ()=>{
+  hamburger.classList.toggle("active");
+  overlay.classList.toggle("show");
+  document.body.style.overflow = overlay.classList.contains("show")?"hidden":"auto";
+});
+
+// Tutup menu bila klik overlay tapi bukan menu
+overlay.addEventListener("click", e=>{
+  if(!navLinks.contains(e.target)){
+    overlay.classList.remove("show");
+    hamburger.classList.remove("active");
+    document.body.style.overflow="auto";
   }
 });
 
 // Navbar hide/show on scroll
 let prevScroll = window.pageYOffset;
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", ()=>{
+  const navbar = document.getElementById("navbar");
   const currentScroll = window.pageYOffset;
   if(currentScroll > prevScroll && currentScroll > 100){
-    navbar.style.top = "-100px";
-  } else {
-    navbar.style.top = "0";
+    navbar.style.top="-100px";
+  }else{
+    navbar.style.top="0";
   }
   prevScroll = currentScroll;
 });
-
-// Music play button
-const audio = document.getElementById('song');
-const playBtn = document.getElementById('playBtn');
-
-playBtn.addEventListener('click', () => {
-  if(audio.paused){
-    audio.play();
-    playBtn.textContent="❚❚";
-  } else {
-    audio.pause();
-    playBtn.textContent="▶";
-  }
-});
-
-// Loop audio dengan delay 2s
-audio.addEventListener('ended', () => {
-  setTimeout(()=>audio.play(),2000);
-});
 </script>
-
 </body>
 </html>
