@@ -115,6 +115,11 @@ body{background:#0b0b10;color:#e5e5e5;scroll-behavior:smooth;}
 }
 .nav-links-mobile a:hover{color:#b56cff;}
 
+/* SHOW MOBILE MENU */
+.nav-links-mobile.show{
+  right:0;
+}
+
 /* OVERLAY */
 .overlay{
   position:fixed;
@@ -133,8 +138,8 @@ body{background:#0b0b10;color:#e5e5e5;scroll-behavior:smooth;}
   .nav-links-desktop{display:none;}
 }
 
-/* HERO */
-h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
+/* HERO / PAGE TITLE */
+h1{text-align:center;color:#b56cff;margin:100px 0 60px;font-size:48px;}
 .character-container{display:flex;justify-content:center;flex-wrap:wrap;padding:0 20px 60px;}
 .character-card{background:#14141c;border-radius:18px;overflow:hidden;text-align:center;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;max-width:300px;margin:10px;}
 .character-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.7);}
@@ -166,6 +171,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   </div>
 </div>
 
+<!-- MOBILE MENU -->
 <div class="nav-links-mobile" id="navLinksMobile">
   <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
   <a href="#">STORY</a>
@@ -174,6 +180,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 </div>
 <div class="overlay" id="overlay"></div>
 
+<!-- PAGE CONTENT -->
 <h1>UNRESOLVED; ISSUE CHARACTER</h1>
 
 <div class="character-container">
