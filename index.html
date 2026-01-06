@@ -1,27 +1,22 @@
-<!-- NAVBAR -->
-<div class="navbar" id="navbar">
-  <div class="logo-container">
-    <div class="logo">UNRESOLVED; |</div>
-    <button id="playBtn">▶</button>
-  </div>
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
-
-<!-- MOBILE MENU & OVERLAY -->
-<div class="overlay" id="overlay">
-  <div class="nav-links" id="navLinks">
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
-    <a href="#universe">STORY</a>
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
-    <a href="#issue">WORLD</a>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unresolved; Character</title>
+<link rel="icon" type="image/png" href="logo.png">
 
 <style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#0b0b10;
+  color:#e5e5e5;
+  scroll-behavior:smooth;
+  padding-top:80px;
+  overflow-x:hidden;
+}
+
 /* NAVBAR */
 .navbar{
   position:fixed;
@@ -151,21 +146,68 @@
     display:flex;
   }
 }
+
+/* HERO TITLE */
+h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
+
+/* CHARACTER CARDS */
+.character-container{display:flex;justify-content:center;flex-wrap:wrap;padding:0 20px 60px;}
+.character-card{background:#14141c;border-radius:18px;overflow:hidden;text-align:center;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;max-width:300px;margin:10px;}
+.character-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.7);}
+.character-card img{width:100%;height:300px;object-fit:cover;}
+.character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
+.character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
 </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar" id="navbar">
+  <div class="logo-container">
+    <div class="logo">UNRESOLVED; |</div>
+    <button id="playBtn">▶</button>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<!-- MOBILE MENU & OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="nav-links" id="navLinks">
+    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
+    <a href="#universe">STORY</a>
+    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
+    <a href="#issue">WORLD</a>
+  </div>
+</div>
+
+<h1>UNRESOLVED; ISSUE CHARACTER</h1>
+
+<div class="character-container">
+  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Biodata-Pelajar/" class="character-card">
+    <img src="zayn.jpg" alt="Zayn">
+    <h3>AHMAD ZAYN RAFI</h3>
+    <p>Protagonist</p>
+  </a>
+</div>
 
 <script>
-// BUTTON PLAY
-const playBtn = document.getElementById('playBtn');
+// AUDIO PLAY
 const audio = new Audio("song.mp3");
+const playBtn = document.getElementById('playBtn');
 playBtn.addEventListener('click', ()=>{
   if(audio.paused){
     audio.play();
-    playBtn.textContent = "❚❚";
-  } else {
+    playBtn.textContent="❚❚";
+  } else{
     audio.pause();
-    playBtn.textContent = "▶";
+    playBtn.textContent="▶";
   }
 });
+audio.addEventListener('ended', ()=>setTimeout(()=>audio.play(),2000));
 
 // HAMBURGER MENU
 const hamburger = document.getElementById('hamburger');
@@ -178,7 +220,7 @@ hamburger.addEventListener('click', ()=>{
   document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : 'auto';
 });
 
-// Tutup menu bila klik overlay
+// Tutup menu bila klik luar
 overlay.addEventListener('click', e=>{
   if(!navLinks.contains(e.target)){
     overlay.classList.remove('show');
@@ -187,16 +229,19 @@ overlay.addEventListener('click', e=>{
   }
 });
 
-// Navbar hide/show on scroll
+// NAVBAR HIDE/SHOW SCROLL
 let prevScroll = window.pageYOffset;
 window.addEventListener('scroll', ()=>{
   const navbar = document.getElementById("navbar");
   const currentScroll = window.pageYOffset;
   if(currentScroll > prevScroll && currentScroll > 100){
     navbar.style.top="-100px";
-  } else {
+  } else{
     navbar.style.top="0";
   }
   prevScroll = currentScroll;
 });
 </script>
+
+</body>
+</html>
