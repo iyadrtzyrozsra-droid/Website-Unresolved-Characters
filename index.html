@@ -20,15 +20,15 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 .character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
 .character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR (SEPERTI BIODATA PELAJAR) ===== */
 .navbar{
   position:fixed;
   top:0;
   left:50%;
   transform:translateX(-50%);
   width:90%;
-  border-radius:14px;
   padding:14px 20px;
+  border-radius:14px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -145,7 +145,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 <body>
 
 <!-- AUDIO -->
-<audio id="audio">
+<audio id="song">
   <source src="song.mp3" type="audio/mp3">
 </audio>
 
@@ -180,54 +180,54 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 </div>
 
 <script>
-// AUDIO PLAY BUTTON
-const audio = document.getElementById('audio');
+// AUDIO
+const audio = document.getElementById('song');
 const playBtn = document.getElementById('playBtn');
-playBtn.addEventListener('click', ()=>{
+playBtn.addEventListener('click', () => {
   if(audio.paused){
     audio.play();
-    playBtn.textContent="❚❚";
-  }else{
+    playBtn.textContent = "❚❚";
+  } else {
     audio.pause();
-    playBtn.textContent="▶";
+    playBtn.textContent = "▶";
   }
 });
-audio.addEventListener('ended', ()=>{setTimeout(()=>audio.play(),2000);});
 
-// HAMBURGER MENU
+// Hamburger + mobile menu
 const hamburger = document.getElementById('hamburger');
 const overlay = document.getElementById('overlay');
 const navLinks = document.getElementById('navLinks');
 
-hamburger.addEventListener('click', ()=>{
+hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   overlay.classList.toggle('show');
-  navLinks.style.right = overlay.classList.contains('show') ? '0' : '-50%';
   document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : 'auto';
 });
 
-// Klik overlay tutup menu
-overlay.addEventListener('click',(e)=>{
+// Tutup menu bila klik luar
+overlay.addEventListener('click', e => {
   if(!navLinks.contains(e.target)){
-    hamburger.classList.remove('active');
     overlay.classList.remove('show');
-    navLinks.style.right='-50%';
-    document.body.style.overflow='auto';
+    hamburger.classList.remove('active');
+    document.body.style.overflow = 'auto';
   }
 });
 
-// NAVBAR HIDE/SHOW ON SCROLL
+// Navbar hide/show on scroll
 let prevScroll = window.pageYOffset;
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', ()=>{
+window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset;
   if(currentScroll > prevScroll && currentScroll > 100){
-    navbar.style.top='-100px';
-  }else{
-    navbar.style.top='0';
+    navbar.style.top = "-100px";
+  } else {
+    navbar.style.top = "0";
   }
-  prevScroll=currentScroll;
+  prevScroll = currentScroll;
 });
+
+// Loop + delay 2s
+audio.addEventListener('ended', () => setTimeout(()=>audio.play(), 2000));
 </script>
 
 </body>
