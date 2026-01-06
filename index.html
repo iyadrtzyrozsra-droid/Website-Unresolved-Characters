@@ -4,22 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unresolved; Character</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
-body{background:#0b0b10;color:#e5e5e5;scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#0b0b10;
+  min-height:100vh;
+  padding-top:80px;
+  display:flex;
+  justify-content:center;
+  transition: all 0.3s;
+  overflow-x:hidden;
+}
 
-/* HERO */
-h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
-.character-container{display:flex;justify-content:center;flex-wrap:wrap;padding:0 20px 60px;}
-.character-card{background:#14141c;border-radius:18px;overflow:hidden;text-align:center;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;max-width:300px;margin:10px;}
-.character-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.7);}
-.character-card img{width:100%;height:300px;object-fit:cover;}
-.character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
-.character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
-
-/* ===== NAVBAR FULL WIDTH BIODATA STYLE ===== */
+/* NAVBAR */
 .navbar{
   position:fixed;
   top:0;
@@ -35,7 +34,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   box-shadow:0 20px 40px rgba(0,0,0,.6);
   z-index:1000;
 }
-  
+
 .logo-container{
   display:flex;
   align-items:center;
@@ -48,6 +47,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   color:#b56cff;
 }
 
+/* Play button */
 #playBtn{
   width:28px;
   height:28px;
@@ -63,18 +63,19 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   font-size:14px;
   transition: transform 0.2s;
 }
-#playBtn:hover{transform: scale(1.1);}
+#playBtn:hover{
+  transform: scale(1.1);
+}
 
 /* Hamburger */
 .hamburger{
   display:none;
   flex-direction:column;
-  justify-content:space-between;
+  cursor:pointer;
   gap:5px;
   width:25px;
   height:20px;
-  cursor:pointer;
-  z-index:1001;
+  justify-content:space-between;
 }
 .hamburger div{
   width:25px;
@@ -86,28 +87,32 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 .hamburger.active div:nth-child(1){
   transform: rotate(45deg) translate(5px,5px);
 }
-.hamburger.active div:nth-child(2){opacity:0;}
+.hamburger.active div:nth-child(2){
+  opacity:0;
+}
 .hamburger.active div:nth-child(3){
   transform: rotate(-45deg) translate(5px,-5px);
 }
 
-/* Overlay */
+/* OVERLAY */
 .overlay{
   position:fixed;
-  inset:0;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   display:none;
-  z-index:998;
-  background:rgba(0,0,0,0.3);
+  z-index:999;
+  background: rgba(0,0,0,0.3);
 }
-.overlay.show{display:block;}
 
-/* Mobile menu */
+/* MOBILE MENU */
 .nav-links{
   position:fixed;
   top:0;
-  right:-50%;
-  width:50%;
+  right:-100%;
   height:100vh;
+  width:50%;
   background:#14141c;
   display:flex;
   flex-direction:column;
@@ -116,29 +121,36 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   padding-right:20px;
   gap:30px;
   transition:right 0.4s ease;
-  z-index:999;
+  z-index:1000;
 }
+
 .nav-links a{
   text-decoration:none;
-  color:#fff;
+  color:#ccc;
   font-size:18px;
   font-weight:600;
+  transition: color 0.3s;
 }
-.nav-links a:hover{color:#b56cff;}
-.overlay.show .nav-links{right:0;}
+.nav-links a:hover{color:#b56cff}
 
-/* Responsive */
+/* show menu */
+.overlay.show{
+  display:block;
+}
+.overlay.show .nav-links{
+  right:0;
+}
+
+/* Hamburger tampil mobile */
 @media(max-width:900px){
-  .hamburger{display:flex;}
+  .hamburger{
+    display:flex;
+  }
 }
 </style>
 </head>
-<body>
 
-<!-- AUDIO -->
-<audio id="song">
-  <source src="song.mp3" type="audio/mp3">
-</audio>
+<body>
 
 <!-- NAVBAR -->
 <div class="navbar" id="navbar">
@@ -163,19 +175,19 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   </div>
 </div>
 
-<h1>UNRESOLVED; ISSUE CHARACTER</h1>
+<h1 style="color:#b56cff;text-align:center;margin:60px 0;font-size:48px;">UNRESOLVED; ISSUE CHARACTER</h1>
 
-<div class="character-container">
-  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Biodata-Pelajar/" class="character-card">
-    <img src="zayn.jpg" alt="Zayn">
-    <h3>AHMAD ZAYN RAFI</h3>
-    <p>Protagonist</p>
+<div class="character-container" style="display:flex;justify-content:center;flex-wrap:wrap;padding:0 20px 60px;">
+  <a href="#" class="character-card" style="background:#14141c;border-radius:18px;overflow:hidden;text-align:center;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;max-width:300px;margin:10px;">
+    <img src="zayn.jpg" alt="Zayn" style="width:100%;height:300px;object-fit:cover;">
+    <h3 style="color:#b56cff;margin:15px 0 10px;font-size:22px;">AHMAD ZAYN RAFI</h3>
+    <p style="color:#ccc;margin-bottom:15px;font-size:14px;">Protagonist</p>
   </a>
 </div>
 
 <script>
 // Audio play button
-const audio = document.getElementById("song");
+const audio = new Audio("song.mp3");
 const playBtn = document.getElementById("playBtn");
 playBtn.addEventListener("click", ()=>{
   if(audio.paused){
@@ -198,7 +210,7 @@ hamburger.addEventListener("click", ()=>{
   document.body.style.overflow = overlay.classList.contains("show")?"hidden":"auto";
 });
 
-// Tutup menu bila klik overlay tapi bukan menu
+// Tutup menu bila klik overlay
 overlay.addEventListener("click", e=>{
   if(!navLinks.contains(e.target)){
     overlay.classList.remove("show");
@@ -220,6 +232,6 @@ window.addEventListener("scroll", ()=>{
   prevScroll = currentScroll;
 });
 </script>
+
 </body>
 </html>
-
