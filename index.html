@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unresolved; Character</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -19,7 +20,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 .character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
 .character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
 
-/* ===== NAVBAR BIODATA STYLE ===== */
+/* ===== NAVBAR ===== */
 .navbar{
   position:fixed;
   top:0;
@@ -30,10 +31,11 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   border-radius:14px;
   padding:14px 20px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   box-shadow:0 20px 40px rgba(0,0,0,.6);
   z-index:1000;
+  transition:top 0.3s;
 }
 
 .logo-container{
@@ -41,40 +43,23 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   align-items:center;
   gap:10px;
 }
-
-.logo{
-  font-weight:700;
-  font-size:22px;
-  color:#b56cff;
+.logo{color:#b56cff;font-weight:700;font-size:22px;}
+.play-btn{
+  width:28px;height:28px;border:none;border-radius:50%;
+  background:#b56cff;color:#000;font-weight:bold;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;cursor:pointer;
 }
 
-#playBtn{
-  width:28px;
-  height:28px;
-  border:none;
-  border-radius:50%;
-  background:#1db954;
-  color:black;
-  font-weight:bold;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  transition: transform 0.2s;
-}
-#playBtn:hover{transform: scale(1.1);}
-
-/* Hamburger */
+/* HAMBURGER */
 .hamburger{
   display:none;
   flex-direction:column;
-  justify-content:space-between;
   gap:5px;
+  cursor:pointer;
   width:25px;
   height:20px;
-  cursor:pointer;
-  z-index:1001;
+  justify-content:space-between;
 }
 .hamburger div{
   width:25px;
@@ -83,31 +68,24 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   border-radius:2px;
   transition: all 0.4s ease;
 }
-.hamburger.active div:nth-child(1){
-  transform: rotate(45deg) translate(5px,5px);
-}
+.hamburger.active div:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .hamburger.active div:nth-child(2){opacity:0;}
-.hamburger.active div:nth-child(3){
-  transform: rotate(-45deg) translate(5px,-5px);
-}
+.hamburger.active div:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 
-/* Overlay */
+/* OVERLAY + MOBILE MENU */
 .overlay{
   position:fixed;
   inset:0;
+  background:rgba(0,0,0,0.3);
   display:none;
   z-index:998;
-  background:rgba(0,0,0,0.3);
 }
-.overlay.show{display:block;}
-
-/* Mobile menu */
 .nav-links{
   position:fixed;
   top:0;
   right:-50%;
-  width:50%;
   height:100vh;
+  width:50%;
   background:#14141c;
   display:flex;
   flex-direction:column;
@@ -119,15 +97,13 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   z-index:999;
 }
 .nav-links a{
-  text-decoration:none;
-  color:#fff;
-  font-size:18px;
-  font-weight:600;
+  color:#fff;text-decoration:none;font-size:18px;font-weight:600;
+  transition:color 0.3s;
 }
 .nav-links a:hover{color:#b56cff;}
 .overlay.show .nav-links{right:0;}
 
-/* Mobile responsive */
+/* Responsive Hamburger */
 @media(max-width:900px){
   .hamburger{display:flex;}
 }
@@ -135,16 +111,11 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 </head>
 <body>
 
-<!-- AUDIO -->
-<audio id="song">
-  <source src="song.mp3" type="audio/mp3">
-</audio>
-
 <!-- NAVBAR -->
-<div class="navbar" id="navbar">
+<div class="navbar">
   <div class="logo-container">
-    <div class="logo">UNRESOLVED; |</div>
-    <button id="playBtn">▶</button>
+    <div class="logo">UNRESOLVED;</div>
+    <button class="play-btn" id="playBtn">▶</button>
   </div>
   <div class="hamburger" id="hamburger">
     <div></div>
@@ -153,7 +124,7 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   </div>
 </div>
 
-<!-- MOBILE MENU & OVERLAY -->
+<!-- OVERLAY + MOBILE MENU -->
 <div class="overlay" id="overlay">
   <div class="nav-links" id="navLinks">
     <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
@@ -162,6 +133,11 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
     <a href="#issue">WORLD</a>
   </div>
 </div>
+
+<!-- AUDIO -->
+<audio id="song">
+  <source src="song.mp3" type="audio/mp3">
+</audio>
 
 <h1>UNRESOLVED; ISSUE CHARACTER</h1>
 
@@ -174,20 +150,17 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 </div>
 
 <script>
-// Audio play button
+// AUDIO
 const audio = document.getElementById("song");
 const playBtn = document.getElementById("playBtn");
+let play=false;
 playBtn.addEventListener("click", ()=>{
-  if(audio.paused){
-    audio.play();
-    playBtn.textContent = "❚❚";
-  }else{
-    audio.pause();
-    playBtn.textContent = "▶";
-  }
+  if(!play){audio.play(); playBtn.textContent="❚❚"; play=true;}
+  else{audio.pause(); playBtn.textContent="▶"; play=false;}
 });
+audio.addEventListener("ended",()=>setTimeout(()=>audio.play(),2000));
 
-// Hamburger toggle
+// HAMBURGER
 const hamburger = document.getElementById("hamburger");
 const overlay = document.getElementById("overlay");
 const navLinks = document.getElementById("navLinks");
@@ -195,30 +168,26 @@ const navLinks = document.getElementById("navLinks");
 hamburger.addEventListener("click", ()=>{
   hamburger.classList.toggle("active");
   overlay.classList.toggle("show");
-  document.body.style.overflow = overlay.classList.contains("show")?"hidden":"auto";
+  document.body.style.overflow = overlay.classList.contains("show") ? "hidden" : "auto";
 });
-
-// Tutup menu bila klik overlay tapi bukan menu
-overlay.addEventListener("click", e=>{
+overlay.addEventListener("click",(e)=>{
   if(!navLinks.contains(e.target)){
     overlay.classList.remove("show");
     hamburger.classList.remove("active");
-    document.body.style.overflow="auto";
+    document.body.style.overflow = "auto";
   }
 });
 
-// Navbar hide/show on scroll
+// NAVBAR HIDE/SHOW ON SCROLL
 let prevScroll = window.pageYOffset;
+const navbar = document.querySelector(".navbar");
 window.addEventListener("scroll", ()=>{
-  const navbar = document.getElementById("navbar");
   const currentScroll = window.pageYOffset;
-  if(currentScroll > prevScroll && currentScroll > 100){
-    navbar.style.top="-100px";
-  }else{
-    navbar.style.top="0";
-  }
+  if(currentScroll > prevScroll && currentScroll > 100){navbar.style.top="-100px";}
+  else{navbar.style.top="0";}
   prevScroll = currentScroll;
 });
 </script>
+
 </body>
 </html>
