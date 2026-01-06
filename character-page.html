@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unresolved; Character</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* NAVBAR */
+.navbar{
+  position:fixed; /* fixed supaya boleh hide/show */
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  background:#14141c;
+  width:85%;
+  border-radius:14px;
+  padding:14px 26px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+  z-index:999;
+  transition: top 0.3s ease; /* smooth hide/show */
+}
+
+.logo{
+  font-weight:700;
+  font-size:22px;
+  color:#b56cff;
+}
+
+.navbar ul{
+  list-style:none;
+  display:flex;
+  gap:26px;
+}
+
+.navbar a{
+  text-decoration:none;
+  color:#ccc;
+  font-size:14px;
+  font-weight:600;
+}
+
+.navbar a:hover{color:#b56cff}
+
+/* Responsive Navbar */
+@media(max-width:900px){
+  .navbar{
+    width:90%;
+    padding:12px 20px;
+  }
+  .navbar ul{
+    gap:14px;
+  }
+  .logo{
+    font-size:20px;
+  }
+}
+</style>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#0b0b10;color:#e5e5e5;scroll-behavior:smooth;}
+
+h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
+
+/* Character Card */
+.character-container{
+  display:flex;
+  justify-content:center;
+  padding:0 20px 60px;
+}
+
+.character-card{
+  background:#14141c;
+  border-radius:18px;
+  overflow:hidden;
+  text-align:center;
+  cursor:pointer;
+  transition:transform 0.3s, box-shadow 0.3s;
+  max-width:300px;
+}
+
+.character-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.7);
+}
+
+.character-card img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+}
+
+.character-card h3{
+  color:#b56cff;
+  margin:15px 0 10px;
+  font-size:22px;
+}
+
+.character-card p{
+  color:#ccc;
+  margin-bottom:15px;
+  font-size:14px;
+}
+</style>
+</head>
+<body>
+
+    <div class="navbar" id="navbar">
+  <div class="logo">UNRESOLVED;</div>
+  <ul>
+    <li><a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a></li>
+    <li><a href="#">STORY</a></li>
+    <li><a href="">CHARACTER</a></li>
+    <li><a href="#">WORLD</a></li>
+  </ul>
+</div>
+
+<h1>UNRESOLVED; ISSUE CHARACTER</h1>
+
+<div class="character-container">
+  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Biodata-Pelajar/" class="character-card">
+    <img src="zayn.jpg" alt="Zayn">
+    <h3>AHMAD ZAYN RAFI</h3>
+    <p>Protagonist</p>
+  </a>
+</div>
+
+<script>
+// Navbar hide/show on scroll
+let prevScroll = window.pageYOffset;
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if(currentScroll > prevScroll && currentScroll > 100){
+    // Scroll ke bawah → sembunyikan navbar
+    navbar.style.top = "-100px";
+  } else {
+    // Scroll ke atas → muncul navbar
+    navbar.style.top = "0";
+  }
+  prevScroll = currentScroll;
+});
+</script>
+
+</body>
+</html>
