@@ -13,8 +13,8 @@ body{background:#0b0b10;color:#e5e5e5;scroll-behavior:smooth;}
 
 /* HERO */
 h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
-.character-container{display:flex;justify-content:center;padding:0 20px 60px;}
-.character-card{background:#14141c;border-radius:18px;overflow:hidden;text-align:center;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;max-width:300px;}
+.character-container{display:flex;justify-content:center;flex-wrap:wrap;padding:0 20px 60px;}
+.character-card{background:#14141c;border-radius:18px;overflow:hidden;text-align:center;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;max-width:300px;margin:10px;}
 .character-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.7);}
 .character-card img{width:100%;height:300px;object-fit:cover;}
 .character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
@@ -22,78 +22,34 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 
 /* DESKTOP NAVBAR */
 .navbar-desktop{
+  display:flex;
   position:fixed;
   top:0;
   left:50%;
   transform:translateX(-50%);
-  width:90%;
+  width:85%;
+  padding:14px 26px;
   background:#14141c;
   border-radius:14px;
-  padding:14px 20px;
-  display:flex;
   align-items:center;
   justify-content:space-between;
   box-shadow:0 20px 40px rgba(0,0,0,.6);
   z-index:999;
+  transition: top 0.3s;
 }
-.navbar-desktop .logo{font-weight:700;font-size:22px;color:#b56cff;}
-.navbar-desktop .nav-links{display:flex;gap:20px;}
-.navbar-desktop .nav-links a{text-decoration:none;color:#ccc;font-size:14px;font-weight:600;}
-.navbar-desktop .nav-links a:hover{color:#b56cff;}
+.navbar-desktop .logo{color:#b56cff;font-weight:700;font-size:22px;}
+.navbar-desktop ul{list-style:none;display:flex;gap:26px;}
+.navbar-desktop a{text-decoration:none;color:#ccc;font-size:14px;font-weight:600;}
+.navbar-desktop a:hover{color:#b56cff;}
+.navbar-desktop .play-btn-desktop{
+  background:#b56cff;width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:12px;color:#000;
+}
 
 /* MOBILE NAVBAR */
-@media(max-width:900px){
-  .navbar-desktop{display:none;}
-}
-
-/* MOBILE ONLY */
-@media(max-width:900px){
-
-body.lock-scroll{overflow:hidden;}
-
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  display:none;
-  z-index:998;
-}
-.overlay::before{
-  content:"";
-  position:absolute;
-  left:0;
-  width:50%;
-  height:100%;
-  background:rgba(0,0,0,.45);
-}
-.overlay.show{display:block;}
-
-/* MOBILE MENU */
-.mobile-menu{
-  position:absolute;
-  right:-100%;
-  width:50%;
-  height:100%;
-  background:#14141c;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-end;
-  padding-right:30px;
-  gap:28px;
-  transition:.4s ease;
-}
-.mobile-menu a{
-  color:#fff;
-  text-decoration:none;
-  font-size:18px;
-  transition:color .3s;
-}
-.mobile-menu a:hover{color:#b56cff;}
-.overlay.show .mobile-menu{right:0;}
-
-/* NAVBAR MOBILE */
 .navbar-mobile{
+  display:none;
   position:fixed;
   top:20px;
   left:50%;
@@ -107,57 +63,73 @@ body.lock-scroll{overflow:hidden;}
   align-items:center;
   z-index:1000;
 }
-
-/* Brand + play */
 .brand{display:flex;align-items:center;gap:10px;}
 .title{color:#b56cff;font-weight:700;}
 .play-btn{
-  background:#b56cff;
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:12px;
-  color:#000;
+  background:#b56cff;width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:12px;color:#000;
 }
 
 /* Hamburger */
 .hamburger{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
-  z-index:1001;
+  display:flex;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;
 }
 .hamburger span{
-  width:24px;
-  height:3px;
-  background:#b56cff;
-  transition:0.3s;
+  width:24px;height:3px;background:#b56cff;transition:0.3s;
 }
-/* Hamburger X animation */
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .hamburger.active span:nth-child(2){opacity:0;}
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+
+/* MOBILE OVERLAY + MENU */
+.overlay{
+  display:none;
+  position:fixed;inset:0;z-index:998;
+}
+.overlay::before{
+  content:"";position:absolute;left:0;width:50%;height:100%;background:rgba(0,0,0,.45);
+}
+.overlay.show{display:block;}
+.mobile-menu{
+  position:absolute;right:-100%;width:50%;height:100%;background:#14141c;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
+  padding-right:30px;gap:28px;transition:.4s ease;
+}
+.mobile-menu a{
+  color:#fff;text-decoration:none;font-size:18px;transition:color .3s;
+}
+.mobile-menu a:hover{color:#b56cff;}
+.overlay.show .mobile-menu{right:0;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .navbar-desktop{display:none;}
+  .navbar-mobile{display:flex;}
 }
 
-/* SCROLL HIDE/SHOW NAVBAR */
+@media(min-width:901px){
+  .navbar-mobile,.overlay{display:none;}
+}
 </style>
 </head>
 <body>
 
+<!-- AUDIO -->
+<audio id="song">
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+
 <!-- DESKTOP NAVBAR -->
 <div class="navbar-desktop" id="navbarDesktop">
   <div class="logo">UNRESOLVED;</div>
-  <div class="nav-links">
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
-    <a href="#universe">STORY</a>
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
-    <a href="#issue">WORLD</a>
-  </div>
+  <ul>
+    <li><a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a></li>
+    <li><a href="#universe">STORY</a></li>
+    <li><a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a></li>
+    <li><a href="#issue">WORLD</a></li>
+  </ul>
+  <div class="play-btn-desktop" id="playBtnDesktop">▶</div>
 </div>
 
 <!-- MOBILE NAVBAR -->
@@ -165,7 +137,7 @@ body.lock-scroll{overflow:hidden;}
   <div class="brand">
     <span class="title">UNRESOLVED;</span>
     <span>|</span>
-    <div class="play-btn" id="playBtn">▶</div>
+    <div class="play-btn" id="playBtnMobile">▶</div>
   </div>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -192,11 +164,6 @@ body.lock-scroll{overflow:hidden;}
   </a>
 </div>
 
-<!-- AUDIO -->
-<audio id="song">
-  <source src="song.mp3" type="audio/mp3">
-</audio>
-
 <script>
 // Hamburger + mobile menu
 const hamburger = document.getElementById("hamburger");
@@ -218,38 +185,37 @@ overlay.onclick = e => {
   }
 };
 
-// Navbar hide/show on scroll (desktop & mobile)
+// Navbar hide/show on scroll DESKTOP
 let prevScroll = window.pageYOffset;
 const navbarDesktop = document.getElementById('navbarDesktop');
-const navbarMobile = document.getElementById('navbarMobile');
-
 window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset;
   if(currentScroll > prevScroll && currentScroll > 100){
-    if(navbarDesktop) navbarDesktop.style.top = "-100px";
-    if(navbarMobile) navbarMobile.style.top = "-100px";
+    navbarDesktop.style.top = "-100px";
   } else {
-    if(navbarDesktop) navbarDesktop.style.top = "0";
-    if(navbarMobile) navbarMobile.style.top = "20px";
+    navbarDesktop.style.top = "0";
   }
   prevScroll = currentScroll;
 });
 
-// Music play button
+// Music play button for mobile + desktop
 const audio = document.getElementById("song");
-const playBtn = document.getElementById("playBtn");
-let play = false;
-playBtn.onclick = () => {
-  if(!play){
-    audio.play();
-    playBtn.textContent="❚❚";
-    play=true;
-  }else{
-    audio.pause();
-    playBtn.textContent="▶";
-    play=false;
-  }
-};
+const playBtns = [document.getElementById("playBtnMobile"), document.getElementById("playBtnDesktop")];
+
+let play=false;
+playBtns.forEach(btn=>{
+  btn.onclick = ()=>{
+    if(!play){
+      audio.play();
+      playBtns.forEach(b=>b.textContent="❚❚");
+      play=true;
+    }else{
+      audio.pause();
+      playBtns.forEach(b=>b.textContent="▶");
+      play=false;
+    }
+  };
+});
 
 // Loop + delay 2s
 audio.addEventListener("ended",()=>{
