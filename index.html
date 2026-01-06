@@ -20,137 +20,153 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 .character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
 .character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
 
-/* ===== DESKTOP NAVBAR ===== */
-.navbar-desktop{
-  display:flex;
+/* ===== NAVBAR ===== */
+.navbar{
   position:fixed;
   top:0;
   left:50%;
   transform:translateX(-50%);
-  width:85%;
-  padding:14px 26px;
-  background:#14141c;
+  width:90%;
   border-radius:14px;
+  padding:14px 20px;
+  display:flex;
   align-items:center;
   justify-content:space-between;
+  background:#14141c;
   box-shadow:0 20px 40px rgba(0,0,0,.6);
-  z-index:999;
-  transition: top 0.3s;
-}
-.navbar-desktop .logo{color:#b56cff;font-weight:700;font-size:22px;}
-.navbar-desktop ul{list-style:none;display:flex;gap:26px;}
-.navbar-desktop a{text-decoration:none;color:#ccc;font-size:14px;font-weight:600;}
-.navbar-desktop a:hover{color:#b56cff;}
-.navbar-desktop .play-btn-desktop{
-  background:#b56cff;width:26px;height:26px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:12px;color:#000;
+  z-index:1000;
+  transition: top 0.3s ease;
 }
 
-/* ===== MOBILE NAVBAR (ubah ikut style biodata pelajar) ===== */
-.navbar-mobile{
-  display:none;
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:90%;
-  padding:14px 18px;
-  background:#14141c;
-  border-radius:16px;
+/* Logo + Play Button */
+.logo-container{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  z-index:1000;
+  gap:10px;
 }
-.brand{display:flex;align-items:center;gap:10px;}
-.title{color:#b56cff;font-weight:700;}
+.logo{
+  font-weight:700;
+  font-size:22px;
+  color:#b56cff;
+}
 .play-btn{
-  background:#b56cff;width:26px;height:26px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:12px;color:#000;
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:50%;
+  background:#b56cff;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  transition: transform 0.2s;
+}
+.play-btn:hover{
+  transform: scale(1.1);
 }
 
 /* Hamburger */
 .hamburger{
-  display:flex;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;
-}
-.hamburger span{
-  width:24px;height:3px;background:#b56cff;transition:0.3s;
-}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.active span:nth-child(2){opacity:0;}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-
-/* MOBILE OVERLAY + MENU */
-.overlay{
   display:none;
-  position:fixed;inset:0;z-index:998;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
+  width:25px;
+  height:20px;
+  justify-content:space-between;
 }
-.overlay::before{
-  content:"";position:absolute;left:0;width:50%;height:100%;background:rgba(0,0,0,.45);
+.hamburger div{
+  width:25px;
+  height:3px;
+  background:#b56cff;
+  border-radius:2px;
+  transition: all 0.4s ease;
 }
-.overlay.show{display:block;}
-.mobile-menu{
-  position:absolute;right:-50%;width:50%;height:100%;background:#14141c;
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
-  padding-right:30px;gap:28px;transition:.4s ease;
+.hamburger.active div:nth-child(1){
+  transform: rotate(45deg) translate(5px,5px);
 }
-.mobile-menu a{
-  color:#fff;text-decoration:none;font-size:18px;transition:color .3s;
+.hamburger.active div:nth-child(2){
+  opacity:0;
 }
-.mobile-menu a:hover{color:#b56cff;}
-.overlay.show .mobile-menu{right:0;}
+.hamburger.active div:nth-child(3){
+  transform: rotate(-45deg) translate(5px,-5px);
+}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .navbar-desktop{display:none;}
-  .navbar-mobile{display:flex;}
+/* Mobile Menu & Overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.3);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:998;
 }
-@media(min-width:901px){
-  .navbar-mobile,.overlay{display:none;}
+.overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.nav-links{
+  position:fixed;
+  top:0;
+  right:-50%;
+  width:50%;
+  height:100vh;
+  background:#14141c;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-end;
+  padding-right:30px;
+  gap:28px;
+  transition:right 0.4s ease;
+  z-index:999;
+}
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:600;
+  transition:color 0.3s;
+}
+.nav-links a:hover{
+  color:#b56cff;
+}
+
+/* Mobile view */
+@media(max-width:900px){
+  .hamburger{display:flex;}
 }
 </style>
 </head>
 <body>
 
 <!-- AUDIO -->
-<audio id="song">
+<audio id="audio">
   <source src="song.mp3" type="audio/mp3">
 </audio>
 
-<!-- DESKTOP NAVBAR -->
-<div class="navbar-desktop" id="navbarDesktop">
-  <div class="logo">UNRESOLVED;</div>
-  <ul>
-    <li><a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a></li>
-    <li><a href="#universe">STORY</a></li>
-    <li><a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a></li>
-    <li><a href="#issue">WORLD</a></li>
-  </ul>
-  <div class="play-btn-desktop" id="playBtnDesktop">▶</div>
-</div>
-
-<!-- MOBILE NAVBAR -->
-<div class="navbar-mobile" id="navbarMobile">
-  <div class="brand">
-    <span class="title">UNRESOLVED;</span>
-    <span>|</span>
-    <div class="play-btn" id="playBtnMobile">▶</div>
+<!-- NAVBAR -->
+<div class="navbar" id="navbar">
+  <div class="logo-container">
+    <div class="logo">UNRESOLVED;</div>
+    <button class="play-btn" id="playBtn">▶</button>
   </div>
   <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
+    <div></div><div></div><div></div>
   </div>
 </div>
 
-<!-- MOBILE OVERLAY + MENU -->
-<div class="overlay" id="overlay">
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
-    <a href="#universe">STORY</a>
-    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
-    <a href="#issue">WORLD</a>
-  </div>
+<!-- MOBILE MENU & OVERLAY -->
+<div class="overlay" id="overlay"></div>
+<div class="nav-links" id="navLinks">
+  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
+  <a href="#universe">STORY</a>
+  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
+  <a href="#issue">WORLD</a>
 </div>
 
 <h1>UNRESOLVED; ISSUE CHARACTER</h1>
@@ -164,63 +180,53 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 </div>
 
 <script>
-// Hamburger + mobile menu
-const hamburger = document.getElementById("hamburger");
-const overlay = document.getElementById("overlay");
-const mobileMenu = document.getElementById("mobileMenu");
-
-hamburger.onclick = () => {
-  hamburger.classList.toggle("active");
-  overlay.classList.toggle("show");
-  mobileMenu.classList.toggle("show");
-  document.body.style.overflow = overlay.classList.contains("show") ? "hidden" : "auto";
-};
-
-// Klik luar menu → tutup
-overlay.onclick = e => {
-  if(!mobileMenu.contains(e.target)){
-    overlay.classList.remove("show");
-    mobileMenu.classList.remove("show");
-    hamburger.classList.remove("active");
-    document.body.style.overflow = "auto";
+// AUDIO PLAY BUTTON
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('playBtn');
+playBtn.addEventListener('click', ()=>{
+  if(audio.paused){
+    audio.play();
+    playBtn.textContent="❚❚";
+  }else{
+    audio.pause();
+    playBtn.textContent="▶";
   }
-};
+});
+audio.addEventListener('ended', ()=>{setTimeout(()=>audio.play(),2000);});
 
-// Navbar hide/show on scroll DESKTOP
+// HAMBURGER MENU
+const hamburger = document.getElementById('hamburger');
+const overlay = document.getElementById('overlay');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', ()=>{
+  hamburger.classList.toggle('active');
+  overlay.classList.toggle('show');
+  navLinks.style.right = overlay.classList.contains('show') ? '0' : '-50%';
+  document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : 'auto';
+});
+
+// Klik overlay tutup menu
+overlay.addEventListener('click',(e)=>{
+  if(!navLinks.contains(e.target)){
+    hamburger.classList.remove('active');
+    overlay.classList.remove('show');
+    navLinks.style.right='-50%';
+    document.body.style.overflow='auto';
+  }
+});
+
+// NAVBAR HIDE/SHOW ON SCROLL
 let prevScroll = window.pageYOffset;
-const navbarDesktop = document.getElementById('navbarDesktop');
-window.addEventListener('scroll', () => {
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', ()=>{
   const currentScroll = window.pageYOffset;
   if(currentScroll > prevScroll && currentScroll > 100){
-    navbarDesktop.style.top = "-100px";
-  } else {
-    navbarDesktop.style.top = "0";
+    navbar.style.top='-100px';
+  }else{
+    navbar.style.top='0';
   }
-  prevScroll = currentScroll;
-});
-
-// Music play button for mobile + desktop
-const audio = document.getElementById("song");
-const playBtns = [document.getElementById("playBtnMobile"), document.getElementById("playBtnDesktop")];
-
-let play=false;
-playBtns.forEach(btn=>{
-  btn.onclick = ()=>{
-    if(!play){
-      audio.play();
-      playBtns.forEach(b=>b.textContent="❚❚");
-      play=true;
-    }else{
-      audio.pause();
-      playBtns.forEach(b=>b.textContent="▶");
-      play=false;
-    }
-  };
-});
-
-// Loop + delay 2s
-audio.addEventListener("ended",()=>{
-  setTimeout(()=>audio.play(),2000);
+  prevScroll=currentScroll;
 });
 </script>
 
