@@ -20,6 +20,32 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
 .character-card h3{color:#b56cff;margin:15px 0 10px;font-size:22px;}
 .character-card p{color:#ccc;margin-bottom:15px;font-size:14px;}
 
+/* DESKTOP NAVBAR */
+.navbar-desktop{
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  background:#14141c;
+  border-radius:14px;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+  z-index:999;
+}
+.navbar-desktop .logo{font-weight:700;font-size:22px;color:#b56cff;}
+.navbar-desktop .nav-links{display:flex;gap:20px;}
+.navbar-desktop .nav-links a{text-decoration:none;color:#ccc;font-size:14px;font-weight:600;}
+.navbar-desktop .nav-links a:hover{color:#b56cff;}
+
+/* MOBILE NAVBAR */
+@media(max-width:900px){
+  .navbar-desktop{display:none;}
+}
+
 /* MOBILE ONLY */
 @media(max-width:900px){
 
@@ -30,7 +56,7 @@ body.lock-scroll{overflow:hidden;}
   position:fixed;
   inset:0;
   display:none;
-  z-index:999;
+  z-index:998;
 }
 .overlay::before{
   content:"";
@@ -66,8 +92,8 @@ body.lock-scroll{overflow:hidden;}
 .mobile-menu a:hover{color:#b56cff;}
 .overlay.show .mobile-menu{right:0;}
 
-/* NAVBAR */
-.navbar{
+/* NAVBAR MOBILE */
+.navbar-mobile{
   position:fixed;
   top:20px;
   left:50%;
@@ -112,29 +138,30 @@ body.lock-scroll{overflow:hidden;}
   background:#b56cff;
   transition:0.3s;
 }
-
 /* Hamburger X animation */
-.hamburger.active span:nth-child(1){
-  transform:rotate(45deg) translate(5px,5px);
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 }
-.hamburger.active span:nth-child(2){
-  opacity:0;
-}
-.hamburger.active span:nth-child(3){
-  transform:rotate(-45deg) translate(5px,-5px);
-}
-}
+
+/* SCROLL HIDE/SHOW NAVBAR */
 </style>
 </head>
 <body>
 
-<!-- AUDIO -->
-<audio id="song">
-  <source src="song.mp3" type="audio/mp3">
-</audio>
+<!-- DESKTOP NAVBAR -->
+<div class="navbar-desktop" id="navbarDesktop">
+  <div class="logo">UNRESOLVED;</div>
+  <div class="nav-links">
+    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
+    <a href="#universe">STORY</a>
+    <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTERS</a>
+    <a href="#issue">WORLD</a>
+  </div>
+</div>
 
-<!-- NAVBAR MOBILE -->
-<div class="navbar" id="navbar">
+<!-- MOBILE NAVBAR -->
+<div class="navbar-mobile" id="navbarMobile">
   <div class="brand">
     <span class="title">UNRESOLVED;</span>
     <span>|</span>
@@ -165,6 +192,11 @@ body.lock-scroll{overflow:hidden;}
   </a>
 </div>
 
+<!-- AUDIO -->
+<audio id="song">
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+
 <script>
 // Hamburger + mobile menu
 const hamburger = document.getElementById("hamburger");
@@ -186,15 +218,19 @@ overlay.onclick = e => {
   }
 };
 
-// Navbar hide/show on scroll
+// Navbar hide/show on scroll (desktop & mobile)
 let prevScroll = window.pageYOffset;
-const navbarElem = document.getElementById('navbar');
+const navbarDesktop = document.getElementById('navbarDesktop');
+const navbarMobile = document.getElementById('navbarMobile');
+
 window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset;
   if(currentScroll > prevScroll && currentScroll > 100){
-    navbarElem.style.top = "-100px";
+    if(navbarDesktop) navbarDesktop.style.top = "-100px";
+    if(navbarMobile) navbarMobile.style.top = "-100px";
   } else {
-    navbarElem.style.top = "20px";
+    if(navbarDesktop) navbarDesktop.style.top = "0";
+    if(navbarMobile) navbarMobile.style.top = "20px";
   }
   prevScroll = currentScroll;
 });
