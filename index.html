@@ -125,38 +125,95 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
     transition:.3s;
   }
 
-  .mobile-menu{
-    position:fixed;
-    top:0;
-    right:-50%;
-    width:50%;
-    height:100vh;
-    background:#14141c;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:24px;
-    padding-left:30px;
-    z-index:999;
-    transition:.4s ease;
-  }
+  /* NAVBAR */
+.navbar{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  padding:14px 18px;
+  background:#14141c;
+  border-radius:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
 
-  .mobile-menu a{
-    color:#fff;
-    font-size:18px;
-    text-decoration:none;
-    font-weight:600;
-  }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.title{color:#b56cff;font-weight:700}
 
-  .mobile-menu.show{
-    right:0;
-  }
+.play-btn{
+  background:#b56cff;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:12px;
+  color:#000;
+}
 
-  .mobile-overlay.show{
-    opacity:1;
-    pointer-events:auto;
-  }
+/* Hamburger */
+.hamburger{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.hamburger span{
+  width:24px;
+  height:3px;
+  background:#b56cff;
+}
 
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:999;
+}
+.overlay::before{
+  content:"";
+  position:absolute;
+  left:0;
+  width:50%;
+  height:100%;
+  background:rgba(0,0,0,.45);
+}
+.mobile-menu{
+  position:absolute;
+  right:-100%;
+  width:50%;
+  height:100%;
+  background:#14141c;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-end;
+  padding-right:30px;
+  gap:28px;
+  transition:.4s ease;
+}
+.mobile-menu a{
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+}
+
+.overlay.show{display:block;}
+.overlay.show .mobile-menu{right:0;}
+
+/* AKTIF MOBILE SAHAJA */
+@media(min-width:901px){
+  .navbar,.overlay{display:none}
 }
 </style>
 </head>
@@ -172,12 +229,32 @@ h1{text-align:center;color:#b56cff;margin:60px 0;font-size:48px;}
   </ul>
 </div>
 
-<div class="mobile-overlay" id="mobileOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Universe/">HOME</a>
-  <a href="#">STORY</a>
-  <a href="https://iyadrtzyrozsra-droid.github.io/Website-Unresolved-Characters/">CHARACTER</a>
-  <a href="#">WORLD</a>
+<!-- AUDIO -->
+<audio id="song">
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="brand">
+    <span class="title">UNRESOLVED;</span>
+    <span>|</span>
+    <div class="play-btn" id="playBtn">▶</div>
+  </div>
+
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- MOBILE OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#hero">HOME</a>
+    <a href="#universe">UNIVERSE</a>
+    <a href="#team">TEAM</a>
+    <a href="#issue">ISSUE</a>
+  </div>
 </div>
 
 <h1>UNRESOLVED; ISSUE CHARACTER</h1>
@@ -207,25 +284,50 @@ window.addEventListener('scroll', () => {
   prevScroll = currentScroll;
 });
 
-/*MOBILE HAMBURGER*/
-const overlay = document.getElementById('mobileOverlay');
-const mobileMenu = document.getElementById('mobileMenu');
+<script>
+const hamburger = document.getElementById("hamburger");
+const overlay = document.getElementById("overlay");
+const mobileMenu = document.getElementById("mobileMenu");
 
-hamburger.addEventListener('click', () => {
-  mobileMenu.classList.add('show');
-  overlay.classList.add('show');
-  document.body.classList.add('lock-scroll');
+/* Hamburger toggle */
+hamburger.onclick = () => {
+  overlay.classList.toggle("show");
+  document.body.style.overflow =
+    overlay.classList.contains("show") ? "hidden" : "auto";
+};
+
+/* Klik luar menu */
+overlay.onclick = e => {
+  if(!mobileMenu.contains(e.target)){
+    overlay.classList.remove("show");
+    document.body.style.overflow = "auto";
+  }
+};
+
+/* Music */
+const audio = document.getElementById("song");
+const playBtn = document.getElementById("playBtn");
+let play = false;
+
+playBtn.onclick = () => {
+  if(!play){
+    audio.play();
+    playBtn.textContent="❚❚";
+    play=true;
+  }else{
+    audio.pause();
+    playBtn.textContent="▶";
+    play=false;
+  }
+};
+
+/* Loop + delay */
+audio.addEventListener("ended",()=>{
+  setTimeout(()=>audio.play(),2000);
 });
-
-overlay.addEventListener('click', closeMenu);
-
-function closeMenu(){
-  mobileMenu.classList.remove('show');
-  overlay.classList.remove('show');
-  document.body.classList.remove('lock-scroll');
-}
 </script>
 
 </body>
 </html>
+
 
